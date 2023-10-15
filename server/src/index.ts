@@ -15,6 +15,11 @@ app.use((req: Request, res: Response, next: NextFunction) => {
     next();
 });
 
+app.post('/', (req: Request, res: Response) => {
+    res.send('Hello World!');
+ }
+);
+
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
 });
