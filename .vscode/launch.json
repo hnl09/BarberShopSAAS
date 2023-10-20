@@ -5,17 +5,8 @@
             "type": "node",
             "name": "TS Debug",
             "request": "attach",
-            "protocol": "inspector",
             "port": 4321,
             "restart": true,
-            "runtimeExecutable": "${workspaceFolder}\\server\\node_modules\\.bin\\ts-node-dev",
-            "program": "${workspaceFolder}\\server\\src\\app.ts",
-            "args": [
-                "--transpile-only",
-                "--respawn",
-                "--project",
-                "server/tsconfig.json",
-            ],
             "skipFiles": [
                 "<node_internals>/**"
             ],
