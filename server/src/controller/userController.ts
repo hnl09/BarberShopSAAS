@@ -1,7 +1,6 @@
 import { Request, Response } from "express"
 import userModel from "../models/userModel"
 import bcrypt from "bcrypt"
-import validator from 'validator'
 import { validateSignUp } from "../helper/validator"
 
 export const loginUser = async (req: Request, res: Response) => {
