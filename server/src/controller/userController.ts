@@ -7,7 +7,7 @@ export const loginUser = async (req: Request, res: Response) => {
 }
 
 export const signUpUser = async (req: Request, res: Response) => {
-    const {email, password} = req.body
+    const {email, password, firstName, lastName, barberShopName} = req.body
 
     try {
         const emailExists = await userModel.findOne({ email: email })
@@ -18,12 +18,15 @@ export const signUpUser = async (req: Request, res: Response) => {
         const salt = await bcrypt.genSalt(10);
         const hash = await bcrypt.hash(password, salt);
       
-        const user = await userModel.create({ email, password: hash });
+        const user = await userModel.create({ email, password: hash, firstName, lastName, barberShopName });
 
         const userWithoutPassword = user.toObject();
         delete userWithoutPassword.password;
-        res.json(userWithoutPassword);
+        
+        console.log(barberShopName)
+
+        res.status(200).json(userWithoutPassword);
     } catch(error){
-        console.error(error)
+        res.status(500).json({ message: error.message });
     }
 }
