@@ -2,6 +2,7 @@ import { Request, Response } from "express"
 import userModel from "../models/userModel"
 import bcrypt from "bcrypt"
 import validator from 'validator'
+import { validateSignUp } from "../helper/validator"
 
 export const loginUser = async (req: Request, res: Response) => {
     res.json({ message: "Login user" })
@@ -18,22 +19,9 @@ interface SignUpRequestBody {
 export const signUpUser = async (req: Request<SignUpRequestBody>, res: Response) => {
     const {email, password, firstName, lastName, barberShopName} = req.body
 
-    // Validation Email and Password
-    if (!email || !password) {
-        return res.status(400).json({ message: 'Email and Password are required'});
-    }
-
-    if(!validator.isEmail(email)){
-        return res.status(400).json({ message: 'Email is not valid'});
-    }
-
-    if(!validator.isStrongPassword(password)){
-        return res.status(400).json({ message: 'Password is not strong enough'})
-    }
-
-    const emailExists = await userModel.findOne({ email: email })
-    if (emailExists) {
-        return res.status(400).json({ message: 'Email already exists'});
+    const errors = await validateSignUp(email, password);
+    if (errors.length > 0) {
+      return res.status(400).json({ errors });
     }
 
     try {
