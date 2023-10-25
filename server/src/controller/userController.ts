@@ -1,20 +1,42 @@
 import { Request, Response } from "express"
 import userModel from "../models/userModel"
 import bcrypt from "bcrypt"
+import validator from 'validator'
 
 export const loginUser = async (req: Request, res: Response) => {
     res.json({ message: "Login user" })
 }
 
-export const signUpUser = async (req: Request, res: Response) => {
+interface SignUpRequestBody {
+    email: string;
+    password: string;
+    firstName: string;
+    lastName: string;
+    barberShopName: string;
+}
+
+export const signUpUser = async (req: Request<SignUpRequestBody>, res: Response) => {
     const {email, password, firstName, lastName, barberShopName} = req.body
 
+    // Validation Email and Password
+    if (!email || !password) {
+        return res.status(400).json({ message: 'Email and Password are required'});
+    }
+
+    if(!validator.isEmail(email)){
+        return res.status(400).json({ message: 'Email is not valid'});
+    }
+
+    if(!validator.isStrongPassword(password)){
+        return res.status(400).json({ message: 'Password is not strong enough'})
+    }
+
+    const emailExists = await userModel.findOne({ email: email })
+    if (emailExists) {
+        return res.status(400).json({ message: 'Email already exists'});
+    }
+
     try {
-        const emailExists = await userModel.findOne({ email: email })
-        if (emailExists) {
-            res.status(400).send({ message: 'Email already exists'});
-            throw new Error('Email already exists');
-        }
         const salt = await bcrypt.genSalt(10);
         const hash = await bcrypt.hash(password, salt);
       
@@ -22,11 +44,9 @@ export const signUpUser = async (req: Request, res: Response) => {
 
         const userWithoutPassword = user.toObject();
         delete userWithoutPassword.password;
-        
-        console.log(barberShopName)
 
-        res.status(200).json(userWithoutPassword);
+        return res.status(200).json(userWithoutPassword);
     } catch(error){
-        res.status(500).json({ message: error.message });
+        return res.status(500).json({ message: error.message });
     }
 }
