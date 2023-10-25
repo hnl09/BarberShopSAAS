@@ -2,6 +2,11 @@ import { Request, Response } from "express"
 import userModel from "../models/userModel"
 import bcrypt from "bcrypt"
 import { validateSignUp } from "../helper/validator"
+import jwt from "jsonwebtoken"
+
+const createToken = (_id) => {
+    return jwt.sign({ _id }, process.env.JWT_SECRET, { expiresIn: "1d" });
+}
 
 export const loginUser = async (req: Request, res: Response) => {
     res.json({ message: "Login user" })
@@ -29,10 +34,10 @@ export const signUpUser = async (req: Request<SignUpRequestBody>, res: Response)
       
         const user = await userModel.create({ email, password: hash, firstName, lastName, barberShopName });
 
-        const userWithoutPassword = user.toObject();
-        delete userWithoutPassword.password;
+        // Create a JWT token
+        const token = createToken(user._id);
 
-        return res.status(200).json(userWithoutPassword);
+        return res.status(200).json({email, token, firstName, lastName, barberShopName});
     } catch(error){
         return res.status(500).json({ message: error.message });
     }
