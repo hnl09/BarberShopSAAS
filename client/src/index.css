@@ -89,3 +89,7 @@ form.signup, form.login {
   background: #fff;
   border-radius: 4px;
 }
+
+span {
+  color: var(--error)
+}

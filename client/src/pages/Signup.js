@@ -7,6 +7,7 @@ const Signup = () => {
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [barberShopName, setBarberShopName] = useState('')
+    const [telephone, setTelephone] = useState('')
     const {signup, error, isLoading} = useSignup()
 
     const handleSubmit = async (e) => {
@@ -19,14 +20,16 @@ const Signup = () => {
         <form className='signup' onSubmit={handleSubmit}>
         <h3>Registro</h3>
 
-        <label>Email:</label>
+        <p>Cadastre-se com seu email e senha.</p>
+        <p>Campos marcados com <span>*</span> são obrigatórios.</p>
+        <label>Email:<span>*</span></label>
         <input 
         type="email"
         onChange={(e) => setEmail(e.target.value)}
         value={email}
         />
 
-        <label>Senha:</label>
+        <label>Senha:<span>*</span></label>
         <input 
         type="password"
         onChange={(e) => setPassword(e.target.value)}
@@ -52,6 +55,13 @@ const Signup = () => {
         type="text"
         onChange={(e) => setBarberShopName(e.target.value)}
         value={barberShopName}
+        />
+
+        <label>Telefone:</label>
+        <input 
+        type="text"
+        onChange={(e) => setTelephone(e.target.value)}
+        value={telephone}
         />
 
         <button disabled={isLoading}>Enviar</button>

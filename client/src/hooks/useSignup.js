@@ -6,7 +6,7 @@ export const useSignup = () => {
     const [isLoading, setIsLoading] = useState(null)
     const { dispatch } = useAuthContext()
 
-    const signup = async (email, password, firstName, lastName, barberShopName) => {
+    const signup = async (email, password, firstName, lastName, barberShopName, telephone) => {
         setIsLoading(true)
         setError(null)
 
@@ -18,14 +18,16 @@ export const useSignup = () => {
             password: password,
             firstName: firstName,
             lastName: lastName,
-            barberShopName: barberShopName
+            barberShopName: barberShopName,
+            telephone: telephone
         })
         })
         const json = await response.json()
 
         if (!response.ok) {
             setIsLoading(false)
-            setError(json.errors)
+            let errors = json.errors
+            setError(errors.join(', '))
         }
 
         if (response.ok) {
