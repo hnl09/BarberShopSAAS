@@ -4,6 +4,7 @@ import { useAuthContext } from "./useAuthContext";
 export const useSignup = () => {
     const [error, setError] = useState(null)
     const [isLoading, setIsLoading] = useState(null)
+    const [hasError, setHasError] = useState(false)
     const { dispatch } = useAuthContext()
 
     const signup = async (email, password, firstName, lastName, barberShopName, telephone) => {
@@ -26,8 +27,16 @@ export const useSignup = () => {
 
         if (!response.ok) {
             setIsLoading(false)
-            let errors = json.errors
-            setError(errors.join(', '))
+            let errors = json.errors.join(', ')
+            setError(errors)
+            setHasError(true)
+
+            if (errors.includes('Email')) {
+                setHasError(true)
+            }
+            if (!errors.includes("Email")) {
+                setHasError(false)
+            }// CREATE PASSWORD VALIDATION
         }
 
         if (response.ok) {
@@ -41,5 +50,5 @@ export const useSignup = () => {
         }
     }
 
-    return { signup, isLoading, error }
+    return { signup, isLoading, error, hasError }
 }

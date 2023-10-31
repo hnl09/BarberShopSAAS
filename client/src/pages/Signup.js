@@ -9,7 +9,7 @@ const Signup = () => {
     const [barberShopName, setBarberShopName] = useState('')
     const [telephone, setTelephone] = useState('')
     
-    const {signup, error, isLoading} = useSignup()
+    const {signup, error, isLoading, hasError} = useSignup()
 
     const handleSubmit = async (e) => {
         e.preventDefault() // This prevents the page from refreshing on submit
@@ -28,6 +28,7 @@ const Signup = () => {
         type="email"
         onChange={(e) => setEmail(e.target.value)}
         value={email}
+        className={hasError ? 'redErrorBorder' : ''}
         />
 
         <label>Senha:<span>*</span></label>

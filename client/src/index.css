@@ -93,3 +93,7 @@ form.signup, form.login {
 span {
   color: var(--error)
 }
+
+.redErrorBorder {
+  border: 1px solid var(--error);
+}
