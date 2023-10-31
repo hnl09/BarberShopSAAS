@@ -8,6 +8,7 @@ export interface UserDocument extends Document {
     firstName: string;
     lastName: string;
     barberShopName: string;
+    telephone: string;
     createdAt: Date;
     updatedAt: Date;
     isActive: boolean;
@@ -20,6 +21,7 @@ const userSchema = new Schema<UserDocument>({
     firstName: {type: String},
     lastName: {type: String},
     barberShopName: {type: String},
+    telephone: {type: String},
     createdAt: {type: Date, default: Date.now},
     updatedAt: {type: Date, default: Date.now},
     isActive: {type: Boolean, default: true},

@@ -46,10 +46,11 @@ interface SignUpRequestBody {
     firstName: string;
     lastName: string;
     barberShopName: string;
+    telephone: string;
 }
 
 export const signUpUser = async (req: Request<SignUpRequestBody>, res: Response) => {
-    const {email, password, firstName, lastName, barberShopName} = req.body
+    const {email, password, firstName, lastName, barberShopName, telephone} = req.body
 
     const errors = await validateSignUp(email, password);
     if (errors.length > 0) {
@@ -60,12 +61,12 @@ export const signUpUser = async (req: Request<SignUpRequestBody>, res: Response)
         const salt = await bcrypt.genSalt(10);
         const hash = await bcrypt.hash(password, salt);
       
-        const user = await userModel.create({ email, password: hash, firstName, lastName, barberShopName });
+        const user = await userModel.create({ email, password: hash, firstName, lastName, barberShopName, telephone });
 
         // Create a JWT token
         const token = createToken(user._id);
 
-        return res.status(200).json({email, token, firstName, lastName, barberShopName});
+        return res.status(200).json({email, token, firstName, lastName, barberShopName, telephone});
     } catch (error){
         return res.status(500).json({ message: error.message });
     }
