@@ -8,12 +8,13 @@ const Signup = () => {
     const [lastName, setLastName] = useState('')
     const [barberShopName, setBarberShopName] = useState('')
     const [telephone, setTelephone] = useState('')
+    
     const {signup, error, isLoading} = useSignup()
 
     const handleSubmit = async (e) => {
         e.preventDefault() // This prevents the page from refreshing on submit
 
-        await signup(email, password)
+        await signup(email, password, firstName, lastName, barberShopName, telephone)
     }
 
     return (
