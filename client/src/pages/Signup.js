@@ -9,7 +9,7 @@ const Signup = () => {
     const [barberShopName, setBarberShopName] = useState('')
     const [telephone, setTelephone] = useState('')
     
-    const {signup, error, isLoading, hasError} = useSignup()
+    const {signup, error, isLoading, hasEmailError, hasPasswordError} = useSignup()
 
     const handleSubmit = async (e) => {
         e.preventDefault() // This prevents the page from refreshing on submit
@@ -28,7 +28,7 @@ const Signup = () => {
         type="email"
         onChange={(e) => setEmail(e.target.value)}
         value={email}
-        className={hasError ? 'redErrorBorder' : ''}
+        className={hasEmailError ? 'redErrorBorder' : ''}
         />
 
         <label>Senha:<span>*</span></label>
@@ -36,6 +36,7 @@ const Signup = () => {
         type="password"
         onChange={(e) => setPassword(e.target.value)}
         value={password}
+        className={hasPasswordError ? 'redErrorBorder' : ''}
         />
         
         <label>Nome:</label>
