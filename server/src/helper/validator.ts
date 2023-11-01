@@ -33,19 +33,11 @@ const emailExists = await userModel.findOne({ email: email });
 const validateLoginEmail = async (email: string) => {
 const emailExists = await userModel.findOne({ email: email });
   if (!emailExists) {
-    return 'Invalid login Credentials';
-  } else if (!email) {
-    return 'Invalid login Credentials'
+    return 'Invalid Login Credentials';
   }
   return null;
 };
 
-const validateLoginPassword = (password: string) => {
-  if (!password) {
-    return 'Invalid login Credentials';
-  }
-  return null;
-};
 
 export const validateSignUp = async (email: string, password: string) => {
 const errors = [];
@@ -74,11 +66,6 @@ const errors = [];
 const userError = await validateLoginEmail(email);
   if (userError) {
     errors.push(userError);
-  }
-
-const passwordError = validateLoginPassword(password);
-  if (passwordError) {
-    errors.push(passwordError);
   }
 
   return errors;

@@ -24,7 +24,7 @@ export const loginUser = async (req: Request<LoginRequestBody>, res: Response) =
 
     const matchPassword = await bcrypt.compare(password, user.password);
     if (!matchPassword) {
-        return res.status(400).json({ errors: ["Invalid login credentials"] });
+        return res.status(400).json({ errors: ["Invalid Login credentials"] });
     }
 
     // Create a JWT token
