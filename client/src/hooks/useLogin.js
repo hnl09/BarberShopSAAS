@@ -1,29 +1,26 @@
 import { useState } from "react";
 import { useAuthContext } from "./useAuthContext";
 
-export const useSignup = () => {
+export const useLogin = () => {
     const [error, setError] = useState(null)
     const [isLoading, setIsLoading] = useState(null)
     const [hasEmailError, setHasEmailError] = useState(false)
     const [hasPasswordError, setHasPasswordError] = useState(false)
     const { dispatch } = useAuthContext()
 
-    const signup = async (email, password, firstName, lastName, barberShopName, telephone) => {
+    const login = async (email, password) => {
         setIsLoading(true)
         setError(null)
 
-        const response = await fetch('http://localhost:4000/api/user/signup', {
+        const response = await fetch('http://localhost:4000/api/user/login', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
             email: email,
-            password: password,
-            firstName: firstName,
-            lastName: lastName,
-            barberShopName: barberShopName,
-            telephone: telephone
+            password: password
         })
         })
+
         const json = await response.json()
 
         if (!response.ok) {
@@ -57,5 +54,5 @@ export const useSignup = () => {
         }
     }
 
-    return { signup, isLoading, error, hasEmailError, hasPasswordError }
+    return { login, error, isLoading, hasEmailError, hasPasswordError }
 }
