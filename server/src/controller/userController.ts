@@ -30,10 +30,12 @@ export const loginUser = async (req: Request<LoginRequestBody>, res: Response) =
     // Create a JWT token
     const token = createToken(user._id);    
 
-    const userWithoutPassword = user.toObject();
-    delete userWithoutPassword.password;
+    const firstName = user.firstName
+    const lastName = user.lastName
+    const barberShopName = user.barberShopName
+    const telephone = user.telephone
 
-    return res.status(200).json({userWithoutPassword, token})
+    return res.status(200).json({email, token, firstName, lastName, barberShopName, telephone})
 
     } catch (error) {
         return res.status(500).json({ message: error.message })
