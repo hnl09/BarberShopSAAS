@@ -4,7 +4,7 @@ import bcrypt from "bcrypt"
 import { validateSignUp, validateLogin } from "../helper/validator"
 import jwt from "jsonwebtoken"
 
-const createToken = (_id) => {
+const createToken = (_id: string) => {
     return jwt.sign({ _id }, process.env.JWT_SECRET, { expiresIn: "1d" });
 }
 
