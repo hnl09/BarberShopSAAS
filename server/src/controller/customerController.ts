@@ -11,9 +11,11 @@ interface createCustomerRequestBody {
 export const createCustomer = async (req: Request<createCustomerRequestBody>, res: Response) => {
     const {email, firstName, lastName, telephone} = req.body
     try {
+        // Add validations like userController
+
         const customer = await customerModel.create({ email, firstName, lastName, telephone })
 
-        return res.status(200).json({email, firstName, lastName, telephone})
+        return res.status(200).json({customer})
     } catch (error) {
         return res.status(500).json({ message: error.message })
     }
