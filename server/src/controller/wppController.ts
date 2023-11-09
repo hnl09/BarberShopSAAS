@@ -12,7 +12,7 @@ export const sendMessage = async (req: Request, res: Response) => {
     try {
         client.messages
         .create({
-            body: 'Se prepare Tarik!!!',
+            body: 'Se prepare!!!',
             from: 'whatsapp:+14155238886',
             to: 'whatsapp:+5511999105159'
         })
