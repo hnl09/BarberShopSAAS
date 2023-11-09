@@ -2,6 +2,7 @@ import express, { Express, Request, Response , Application, NextFunction } from 
 import cors from 'cors';
 import userRoutes from '../routes/user';
 import whatsappRoutes from '../routes/wpp'
+import customerRoutes from '../routes/customer'
 
 function createServer() {
     const app: Application = express();
@@ -20,6 +21,8 @@ function createServer() {
     app.use('/api/user', userRoutes)
 
     app.use('/api/whatsapp', whatsappRoutes)
+
+    app.use('/api/customer', customerRoutes)
 
     return app
 }

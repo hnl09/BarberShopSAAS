@@ -16,7 +16,7 @@ const customerSchema = new Schema<CustomerDocument>({
     email: {type: String, required: true, unique: true},
     firstName: {type: String},
     lastName: {type: String},
-    telephone: {type: String},
+    telephone: {type: String, required: true, unique: true},
     lastVisit: {type: Date, default: Date.now},
     createdAt: {type: Date, default: Date.now},
     updatedAt: {type: Date, default: Date.now},
