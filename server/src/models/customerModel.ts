@@ -10,6 +10,7 @@ export interface CustomerDocument extends Document {
     lastVisit: Date;
     createdAt: Date;
     updatedAt: Date;
+    messageLogs: Object;
 }
 
 export const customerSchema = new Schema<CustomerDocument>({
@@ -20,6 +21,7 @@ export const customerSchema = new Schema<CustomerDocument>({
     lastVisit: {type: Date, default: Date.now},
     createdAt: {type: Date, default: Date.now},
     updatedAt: {type: Date, default: Date.now},
+    messageLogs: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Message' }],
 })
 
 const customerModel = mongoose.model<CustomerDocument>('Customer', customerSchema)

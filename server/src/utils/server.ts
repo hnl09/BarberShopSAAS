@@ -1,7 +1,7 @@
 import express, { Express, Request, Response , Application, NextFunction } from 'express';
 import cors from 'cors';
 import userRoutes from '../routes/user';
-import whatsappRoutes from '../routes/wpp'
+import whatsappRoutes from '../routes/message'
 import customerRoutes from '../routes/customer'
 
 function createServer() {
