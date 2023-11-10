@@ -12,7 +12,7 @@ export interface CustomerDocument extends Document {
     updatedAt: Date;
 }
 
-const customerSchema = new Schema<CustomerDocument>({
+export const customerSchema = new Schema<CustomerDocument>({
     email: {type: String, required: true, unique: true},
     firstName: {type: String},
     lastName: {type: String},
