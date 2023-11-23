@@ -16,7 +16,7 @@ export const sendMessage = async (req: Request, res: Response) => {
 
     try {
         const customer = await customerModel.findOne({email})
-        const messageContent = "Nós sentimos sua falta! Na proxima visita informe o cupom NAREGUA10 para ganhar 10% de desconto na sua próxima visita! Disponível por 15 dias."
+        const messageContent = "Nós sentimos sua falta! Na proxima visita informe o cupom NAREGUA10 para ganhar 10% de desconto! Disponível por 15 dias."
 
         if (!customer) {
             return res.status(404).json({ error: 'Customer not found.' });
