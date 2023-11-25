@@ -13,6 +13,7 @@ export interface UserDocument extends Document {
     updatedAt: Date;
     isActive: boolean;
     isVerified: boolean;
+    appointments: Object;
 }
 
 const userSchema = new Schema<UserDocument>({
@@ -25,7 +26,8 @@ const userSchema = new Schema<UserDocument>({
     createdAt: {type: Date, default: Date.now},
     updatedAt: {type: Date, default: Date.now},
     isActive: {type: Boolean, default: true},
-    isVerified: {type: Boolean, default: false}
+    isVerified: {type: Boolean, default: false},
+    appointments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Appointment' }]
 })
 
 const userModel = mongoose.model<UserDocument>('User', userSchema)
