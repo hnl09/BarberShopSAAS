@@ -141,3 +141,21 @@ export const updateAppointment = async (req: Request, res: Response) => {
         return res.status(500).json({ message: error.message })
     }
 }
+
+export const deleteAppointment = async (req: Request, res: Response) => {
+    const { appointmentId } = req.params;
+
+    try {
+    const appointment = await appointmentModel.findById(appointmentId);
+    if (!appointment) {
+      return res.status(404).json({ error: 'Appointment not found.' });
+    }
+
+    await appointmentModel.findByIdAndDelete(appointmentId);
+
+    return res.status(200).json({ message: 'Appointment deleted successfully.' });
+
+    } catch (error) {
+        return res.status(500).json({ message: error.message })
+    }
+}
