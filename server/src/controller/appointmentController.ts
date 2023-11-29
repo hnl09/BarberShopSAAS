@@ -85,7 +85,7 @@ export const createAppointment = async (req: Request<createAppointmentRequest>, 
 
         await newAppointment.save();
 
-        res.status(200).json({ message: 'Agendamento feito!' });
+        res.status(201).json({ message: 'Agendamento feito!' });
     } catch (error) {
         return res.status(500).json({ message: error.message });
     }

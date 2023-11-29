@@ -4,6 +4,7 @@ import userRoutes from '../routes/user';
 import whatsappRoutes from '../routes/message'
 import customerRoutes from '../routes/customer'
 import appointmentRoutes from '../routes/appointment'
+import couponRoutes from '../routes/coupon'
 
 function createServer() {
     const app: Application = express();
@@ -26,6 +27,8 @@ function createServer() {
     app.use('/api/customer', customerRoutes)
 
     app.use('/api/appointments', appointmentRoutes)
+
+    app.use('/api/coupons', couponRoutes)
 
     return app
 }
