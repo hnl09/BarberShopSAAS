@@ -4,7 +4,24 @@ import userModel from "../models/userModel";
 import customerModel from "../models/customerModel";
 import { convertTimeToMinutes } from "../helper/functions";
 
-// Assuming you have the convertTimeToMinutes function defined as mentioned earlier
+export const getAppointments = async (req: Request, res: Response) => {
+    const barberShopEmail: string = req.params.barberShopEmail
+
+    try {
+        const barberShop = await userModel.findOne({ email: barberShopEmail });
+
+        if (!barberShop) {
+            return res.status(404).json({ error: 'Barber shop not found.' });
+        }
+
+        const appointments = await appointmentModel.find({ barberShop: barberShop._id });
+
+        return res.status(200).json({ appointments });
+
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+}
 
 interface createAppointmentRequest {
     customerEmail: string;
@@ -86,6 +103,7 @@ interface updateAppointmentRequest {
     price?: number;
     notes?: string;
 }
+
 export const updateAppointment = async (req: Request, res: Response) => {
     const { customerEmail, barberShopEmail, appointmentId } = req.params;
 

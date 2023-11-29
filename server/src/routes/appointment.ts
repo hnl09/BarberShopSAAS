@@ -1,7 +1,9 @@
 import express from 'express'
-import { createAppointment, updateAppointment } from '../controller/appointmentController'
+import { createAppointment, getAppointments, updateAppointment } from '../controller/appointmentController'
 
 const router = express.Router()
+
+router.get('/:barberShopEmail', getAppointments)
 
 router.post('/create/:customerEmail/:barberShopEmail', createAppointment)
 
