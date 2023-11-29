@@ -20,7 +20,7 @@ const appointmentSchema = new Schema<AppointmentDocument>({
     barberShop: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     date: { type: Date, required: true },
     time: { type: String, required: true },
-    status: [{ type: String }],
+    status: { type: String },
     serviceType: { type: String, required: true },
     serviceDetails: String,
     price: { type: Number, required: true },
