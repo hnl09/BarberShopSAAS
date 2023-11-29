@@ -12,10 +12,11 @@ export interface AppointmentDocument extends Document {
     serviceDetails: string;
     price: number;
     createdAt: Date;
+    updatedAt: Date;
     notes: string;
 }
 
-const appointmentSchema = new Schema<AppointmentDocument>({
+export const appointmentSchema = new Schema<AppointmentDocument>({
     customer: { type: mongoose.Schema.Types.ObjectId, ref: 'Customer', required: true },
     barberShop: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     date: { type: Date, required: true },
@@ -25,6 +26,7 @@ const appointmentSchema = new Schema<AppointmentDocument>({
     serviceDetails: String,
     price: { type: Number, required: true },
     createdAt: { type: Date, default: Date.now },
+    updatedAt: {type: Date, default: Date.now},
     notes: String
 })
 
