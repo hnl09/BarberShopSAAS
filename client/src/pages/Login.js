@@ -1,9 +1,12 @@
 import { useState } from "react"
 import { useLogin } from "../hooks/useLogin"
+import { useNavigate } from "react-router-dom";
+
 
 const Login = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const navigate = useNavigate();
 
     const {login, error, isLoading, hasEmailError, hasPasswordError} = useLogin()
 
@@ -11,6 +14,7 @@ const Login = () => {
         e.preventDefault() // This prevents the page from refreshing on submit
 
         await login(email, password)
+        navigate('/');
     }
 
     return (
