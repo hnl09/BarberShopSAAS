@@ -20,7 +20,8 @@ export const getAppointments = async (req: Request, res: Response) => {
             .populate({
                 path: 'barberShop',
                 select: '-password' // Exclude the password field
-            });
+            })
+            .sort({ date: -1, time: -1 }); // Sort by date in descending order, then time in descending order
 
         return res.status(200).json({ appointments });
 
