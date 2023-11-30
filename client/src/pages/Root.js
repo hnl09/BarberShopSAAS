@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Root.css'
+import AppointmentCard from '../components/AppointmentCard';
 
 const Root = () => {
   const [appointments, setAppointments] = useState([]);
@@ -61,13 +62,7 @@ const Root = () => {
     <div className="root-container">
       <h1>Agendamentos</h1>
       {visibleAppointments.map((appointment, index) => (
-        <div key={index} className="appointment-card">
-          <h2>{appointment.customer.firstName} {appointment.customer.lastName}</h2>
-          <p>Data: {formatDate(appointment.date)}</p>
-          <p>Hora: {appointment.time}</p>
-          <p>Valor: R$ {appointment.price}</p>
-          <p>Situação: {appointment.status}</p>
-        </div>
+        <AppointmentCard key={index} appointment={appointment} />
       ))}
       {appointments.length > 6 && 
         <div className="pagination">
