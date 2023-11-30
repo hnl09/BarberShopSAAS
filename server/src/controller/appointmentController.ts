@@ -14,7 +14,10 @@ export const getAppointments = async (req: Request, res: Response) => {
             return res.status(404).json({ error: 'Barber shop not found.' });
         }
 
-        const appointments = await appointmentModel.find({ barberShop: barberShop._id });
+        const appointments = await appointmentModel
+        .find({ barberShop: barberShop._id })
+        .populate('customer')
+        .populate('barberShop');
 
         return res.status(200).json({ appointments });
 
