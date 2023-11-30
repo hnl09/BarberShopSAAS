@@ -5,7 +5,7 @@ import customerModel from "../models/customerModel";
 import { convertTimeToMinutes } from "../helper/functions";
 
 export const getAppointments = async (req: Request, res: Response) => {
-    const barberShopEmail: string = req.params.barberShopEmail
+    const barberShopEmail: string = req.params.barberShopEmail;
 
     try {
         const barberShop = await userModel.findOne({ email: barberShopEmail });
@@ -15,16 +15,19 @@ export const getAppointments = async (req: Request, res: Response) => {
         }
 
         const appointments = await appointmentModel
-        .find({ barberShop: barberShop._id })
-        .populate('customer')
-        .populate('barberShop');
+            .find({ barberShop: barberShop._id })
+            .populate('customer')
+            .populate({
+                path: 'barberShop',
+                select: '-password' // Exclude the password field
+            });
 
         return res.status(200).json({ appointments });
 
     } catch (error) {
         return res.status(500).json({ message: error.message });
     }
-}
+};
 
 interface createAppointmentRequest {
     customerEmail: string;
