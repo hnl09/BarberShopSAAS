@@ -8,14 +8,6 @@ const Root = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const appointmentsPerPage = 6;
 
-  const formatDate = (inputDate) => {
-    const date = new Date(inputDate);
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
-    return `${day}/${month}/${year}`;
-  };
-
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
