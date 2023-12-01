@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 
 const AppointmentCard = ({ appointment }) => {
-  const [status, setStatus] = useState(appointment.status); // Use useState to handle the status
+  const [status, setStatus] = useState(appointment.status);
+  const [finished, setFinished] = useState('Finalizar atendimento')
 
   const updatedDate = new Date();
 
@@ -23,6 +24,7 @@ const AppointmentCard = ({ appointment }) => {
       }
 
       setStatus('Finalizado');
+      setFinished('Atendimento Finalizado!')
     } catch (error) {
       console.error('Error updating status:', error);
     }
@@ -46,7 +48,7 @@ const AppointmentCard = ({ appointment }) => {
       {appointment.serviceDetails !== "" && <p>Detalhes do Serviço: {appointment.serviceDetails}</p>}
       {appointment.notes !== "" && <p>Notas: {appointment.notes}</p>}
       <p>Situação: {status}</p>
-      <button onClick={changeStatus}>Finalizar atendimento</button>
+      <button onClick={changeStatus}>{finished}</button>
     </div>
   );
 };
