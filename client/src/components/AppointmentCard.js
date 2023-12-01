@@ -49,8 +49,8 @@ const AppointmentCard = ({ appointment }) => {
       {appointment.serviceDetails !== "" && <p>Detalhes do Serviço: {appointment.serviceDetails}</p>}
       {appointment.notes !== "" && <p>Notas: {appointment.notes}</p>}
       <p>Situação: {status}</p>
-      {appointment.status == "Finalizado" && <button>Remarcar</button>}
-      {appointment.status == "Agendado" && <button onClick={changeStatus}>{finished}</button>}
+      {appointment.status === "Finalizado" && <button>Remarcar</button>}
+      {appointment.status === "Agendado" && <button onClick={changeStatus}>{finished}</button>}
 
     </div>
   );
