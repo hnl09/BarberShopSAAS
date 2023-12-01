@@ -38,17 +38,20 @@ const AppointmentCard = ({ appointment }) => {
     return `${day}/${month}/${year}`;
   };
 
+  // Adicionar funcionalidade de remarcar
   return (
     <div className="appointment-card">
       <h2>{appointment.customer.firstName} {appointment.customer.lastName}</h2>
       <p>Data: {formatDate(appointment.date)}</p>
       <p>Hora: {appointment.time}</p>
-      <p>Valor: R${appointment.price}</p>
+      <p>Valor: R$ {appointment.price}</p>
       {appointment.serviceType !== "" && <p>Tipo de Serviço: {appointment.serviceType}</p>}
       {appointment.serviceDetails !== "" && <p>Detalhes do Serviço: {appointment.serviceDetails}</p>}
       {appointment.notes !== "" && <p>Notas: {appointment.notes}</p>}
       <p>Situação: {status}</p>
-      <button onClick={changeStatus}>{finished}</button>
+      {appointment.status == "Finalizado" && <button>Remarcar</button>}
+      {appointment.status == "Agendado" && <button onClick={changeStatus}>{finished}</button>}
+
     </div>
   );
 };
