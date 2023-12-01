@@ -8,7 +8,8 @@ const AppointmentCard = ({ appointment }) => {
 
   const changeStatus = async () => {
     try {
-      const response = await fetch(`http://localhost:4000/api/appointments/update/${appointment.customer.email}/henriquenl09@gmail.com/${appointment._id}`, { // change barbershopemail to dynamic with context
+      const userData = JSON.parse(localStorage.getItem('user'));
+      const response = await fetch(`http://localhost:4000/api/appointments/update/${appointment.customer.email}/${userData.email}/${appointment._id}`, { // change barbershopemail to dynamic with context
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json'
