@@ -8,7 +8,7 @@ const AppointmentCard = ({ appointment }) => {
 
   const changeStatus = async () => {
     try {
-      const response = await fetch(`http://localhost:4000/api/appointments/update/jill@gmail.com/henriquenl09@gmail.com/6568d4828d5bb6721113ecf6`, {
+      const response = await fetch(`http://localhost:4000/api/appointments/update/${appointment.customer.email}/henriquenl09@gmail.com/${appointment._id}`, { // change barbershopemail to dynamic with context
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json'
