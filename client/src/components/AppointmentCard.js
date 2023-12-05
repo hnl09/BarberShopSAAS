@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
+import { useAppointmentsContext  } from '../hooks/useAppointmentsContext';
 
 const AppointmentCard = ({ appointment }) => {
+  const { appointments, dispatch } = useAppointmentsContext()
+
   const [status, setStatus] = useState(appointment.status);
   const [finished, setFinished] = useState('Finalizar atendimento')
 

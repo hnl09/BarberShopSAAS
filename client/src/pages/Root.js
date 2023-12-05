@@ -11,7 +11,8 @@ const Root = () => {
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
-        const response = await fetch('http://localhost:4000/api/appointments/henriquenl09@gmail.com');
+        const userData = JSON.parse(localStorage.getItem('user'));
+        const response = await fetch(`http://localhost:4000/api/appointments/${userData.email}`);
         if (!response.ok) {
           throw new Error('Failed to fetch appointments');
         }
