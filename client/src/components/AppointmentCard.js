@@ -9,7 +9,7 @@ const AppointmentCard = ({ appointment }) => {
   const changeStatus = async () => {
     try {
       const userData = JSON.parse(localStorage.getItem('user'));
-      const response = await fetch(`http://localhost:4000/api/appointments/update/${appointment.customer.email}/${userData.email}/${appointment._id}`, { // change barbershopemail to dynamic with context
+      const response = await fetch(`http://localhost:4000/api/appointments/update/${appointment.customer.email}/${userData.email}/${appointment._id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json'
@@ -30,6 +30,23 @@ const AppointmentCard = ({ appointment }) => {
       console.error('Error updating status:', error);
     }
   };
+
+  const deleteAppointment = async () => {
+      try {
+        const response = await fetch(`http://localhost:4000/api/appointments/delete/${appointment._id}`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to delete appointment');
+        }
+      } catch (error) {
+        console.error('Error Deleting Appointment:', error);
+    }
+  }
 
   const formatDate = (inputDate) => {
     const date = new Date(inputDate);
@@ -52,7 +69,7 @@ const AppointmentCard = ({ appointment }) => {
       <p>Situação: {status}</p>
       {appointment.status === "Finalizado" && <button>Remarcar</button>}
       {appointment.status === "Agendado" && <button onClick={changeStatus}>{finished}</button>}
-
+      <button onClick={deleteAppointment}>Deletar</button>
     </div>
   );
 };
