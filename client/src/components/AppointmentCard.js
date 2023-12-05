@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useAppointmentsContext } from '../hooks/useAppointmentsContext';
 
 const AppointmentCard = ({ appointment }) => {
+  const { dispatch } = useAppointmentsContext()
 
   const [status, setStatus] = useState(appointment.status);
   const [finished, setFinished] = useState('Finalizar atendimento')
@@ -21,10 +23,12 @@ const AppointmentCard = ({ appointment }) => {
         })
       });
 
+      const json = await response.json()
+
       if (!response.ok) {
         throw new Error('Failed to update status');
       }
-
+      dispatch({type: "DELETE_WORKOUT", payload: json})
       setStatus('Finalizado');
       setFinished('Atendimento Finalizado!')
     } catch (error) {

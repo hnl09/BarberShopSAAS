@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './Root.css'
 import AppointmentCard from '../components/AppointmentCard';
+import { useAppointmentsContext } from '../hooks/useAppointmentsContext';
+
 
 
 const Root = () => {
+  const { dispatch } = useAppointmentsContext()
   const [appointments, setAppointments] = useState([]);
   const [visibleAppointments, setVisibleAppointments] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -14,19 +17,24 @@ const Root = () => {
       try {
         const userData = JSON.parse(localStorage.getItem('user'));
         const response = await fetch(`http://localhost:4000/api/appointments/${userData.email}`);
-        if (!response.ok) {
+        const data = await response.json();
+  
+        if (response.ok) {
+          dispatch({ type: 'SET_APPOINTMENT', payload: data });
+          console.log(data); // Check the received data
+  
+          setAppointments(data.appointments || []);
+        } else {
           throw new Error('Failed to fetch appointments');
         }
-        const data = await response.json();
-        // Extract the 'appointments' array from the response data
-        setAppointments(data.appointments || []);
       } catch (error) {
         console.error('Error fetching appointments:', error);
       }
     };
-
+  
     fetchAppointments();
-  }, []);
+  }, [dispatch]);
+  
 
   useEffect(() => {
     const indexOfLastAppointment = currentPage * appointmentsPerPage;

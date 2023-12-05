@@ -4,9 +4,9 @@ export const AppointmentsContext = createContext()
 
 export const appointmentsReducer = (state, action) => {
     switch (action.type) {
-        case 'DELETE_APPOINTMENT':
+        case 'SET_APPOINTMENT':
             return {
-                appointments: action.payload
+                appointment: action.payload
             }
         default:
             return state
@@ -15,7 +15,7 @@ export const appointmentsReducer = (state, action) => {
 
 export const AppointmentsContextProvider = ({ children }) => {
     const [state, dispatch] = useReducer(appointmentsReducer, {
-        appointments: null
+        appointment: null
     })
 
     return (
