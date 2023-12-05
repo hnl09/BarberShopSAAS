@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Root.css'
 import AppointmentCard from '../components/AppointmentCard';
 
+
 const Root = () => {
   const [appointments, setAppointments] = useState([]);
   const [visibleAppointments, setVisibleAppointments] = useState([]);
