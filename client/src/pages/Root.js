@@ -21,7 +21,6 @@ const Root = () => {
   
         if (response.ok) {
           dispatch({ type: 'SET_APPOINTMENT', payload: data });
-          console.log(data); // Check the received data
   
           setAppointments(data.appointments || []);
         } else {

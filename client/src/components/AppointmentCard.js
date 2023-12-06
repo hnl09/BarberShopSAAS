@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
-import { useAppointmentsContext } from '../hooks/useAppointmentsContext';
 
 const AppointmentCard = ({ appointment }) => {
-  const { dispatch } = useAppointmentsContext()
-
   const [status, setStatus] = useState(appointment.status);
   const [finished, setFinished] = useState('Finalizar atendimento')
 
@@ -23,12 +20,10 @@ const AppointmentCard = ({ appointment }) => {
         })
       });
 
-      const json = await response.json()
 
       if (!response.ok) {
         throw new Error('Failed to update status');
       }
-      dispatch({type: "DELETE_WORKOUT", payload: json})
       setStatus('Finalizado');
       setFinished('Atendimento Finalizado!')
     } catch (error) {
@@ -48,6 +43,11 @@ const AppointmentCard = ({ appointment }) => {
         if (!response.ok) {
           throw new Error('Failed to delete appointment');
         }
+
+        const divToRemove = document.querySelector(`.app1011${appointment._id}`);
+        if (divToRemove) {
+          divToRemove.remove();
+        }
       } catch (error) {
         console.error('Error Deleting Appointment:', error);
     }
@@ -63,7 +63,7 @@ const AppointmentCard = ({ appointment }) => {
 
   // Adicionar funcionalidade de remarcar
   return (
-    <div className="appointment-card">
+    <div className={`appointment-card app1011${appointment._id}`}>
       <h2>{appointment.customer.firstName} {appointment.customer.lastName}</h2>
       <p>Data: {formatDate(appointment.date)}</p>
       <p>Hora: {appointment.time}</p>
