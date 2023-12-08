@@ -6,8 +6,10 @@ import { useAppointmentsContext } from '../hooks/useAppointmentsContext';
 
 
 const Root = () => {
-  const { dispatch } = useAppointmentsContext()
+  const { state, dispatch } = useAppointmentsContext()
+  const { appointment } = state;  
   const [appointments, setAppointments] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [visibleAppointments, setVisibleAppointments] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const appointmentsPerPage = 6;
@@ -17,12 +19,12 @@ const Root = () => {
       try {
         const userData = JSON.parse(localStorage.getItem('user'));
         const response = await fetch(`http://localhost:4000/api/appointments/${userData.email}`);
-        const data = await response.json();
   
         if (response.ok) {
+          const data = await response.json();
           dispatch({ type: 'SET_APPOINTMENT', payload: data });
   
-          setAppointments(data.appointments || []);
+          setLoading(false);
         } else {
           throw new Error('Failed to fetch appointments');
         }
@@ -33,7 +35,12 @@ const Root = () => {
   
     fetchAppointments();
   }, [dispatch]);
-  
+
+  useEffect(() => {
+    if (appointment) {
+      setAppointments(appointment.appointments || []);
+    }
+  }, [appointment]);
 
   useEffect(() => {
     const indexOfLastAppointment = currentPage * appointmentsPerPage;
@@ -62,6 +69,8 @@ const Root = () => {
   return (
     <div className="root-container">
       <h1>Agendamentos</h1>
+      {loading && <div>Carregando...</div>}
+      {!loading && appointment === null && <div>Nenhum agendamento encontrado.</div>}
       {visibleAppointments.map((appointment, index) => (
         <AppointmentCard key={index} appointment={appointment} />
       ))}

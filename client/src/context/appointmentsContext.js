@@ -23,7 +23,7 @@ export const AppointmentsContextProvider = ({ children }) => {
     })
 
     return (
-        <AppointmentsContext.Provider value={{...state, dispatch}}>
+        <AppointmentsContext.Provider value={{state, dispatch}}>
             { children }
         </AppointmentsContext.Provider>
     )
