@@ -3,8 +3,6 @@ import './Root.css'
 import AppointmentCard from '../components/AppointmentCard';
 import { useAppointmentsContext } from '../hooks/useAppointmentsContext';
 
-
-
 const Root = () => {
   const { state, dispatch } = useAppointmentsContext()
   const { appointment } = state;  

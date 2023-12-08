@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useAppointmentsContext } from '../hooks/useAppointmentsContext';
 
 const AppointmentCard = ({ appointment }) => {
+  const { state, dispatch } = useAppointmentsContext()
+  const { appointment: data } = state; 
   const [status, setStatus] = useState(appointment.status);
   const [finished, setFinished] = useState('Finalizar atendimento')
 
@@ -20,7 +23,6 @@ const AppointmentCard = ({ appointment }) => {
         })
       });
 
-
       if (!response.ok) {
         throw new Error('Failed to update status');
       }
@@ -30,29 +32,25 @@ const AppointmentCard = ({ appointment }) => {
       console.error('Error updating status:', error);
     }
   };
-
+  
   const deleteAppointment = async () => {
       try {
-        const response = await fetch(`http://localhost:4000/api/appointments/delete/${appointment._id}`, {
+        await fetch(`http://localhost:4000/api/appointments/delete/${appointment._id}`, {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json'
           }
         });
 
-        if (!response.ok) {
-          throw new Error('Failed to delete appointment');
+        if (data) {
+          dispatch({type: 'DELETE_APPOINTMENT', payload: appointment._id})
         }
 
-        const divToRemove = document.querySelector(`.app1011${appointment._id}`);
-        if (divToRemove) {
-          divToRemove.remove();
-        }
       } catch (error) {
         console.error('Error Deleting Appointment:', error);
     }
   }
-
+  
   const formatDate = (inputDate) => {
     const date = new Date(inputDate);
     const day = date.getUTCDate();
