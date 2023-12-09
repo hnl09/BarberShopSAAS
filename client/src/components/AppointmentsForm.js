@@ -74,7 +74,8 @@ const AppointmentsForm = () => {
                 value={serviceType}
                 />
             <label>Detalhes do Serviço:</label>
-                <textarea
+                <input
+                type='text'
                 onChange={(e) => setServiceDetails(e.target.value)}
                 value={serviceDetails}
                 />
@@ -85,7 +86,8 @@ const AppointmentsForm = () => {
                 value={price}
                 />
             <label>Notas:</label>
-                <textarea
+                <input
+                type='text'
                 onChange={(e) => setNotes(e.target.value)}
                 value={notes}
                 />
