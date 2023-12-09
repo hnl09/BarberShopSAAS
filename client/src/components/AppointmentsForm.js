@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useAppointmentsContext } from "../hooks/useAppointmentsContext"
 
 const AppointmentsForm = () => {
-    const { dispatch, state } = useAppointmentsContext()
+    const { dispatch } = useAppointmentsContext()
     const [customerEmail, setCustomerEmail] = useState('')
     const [date, setDate] = useState('')
     const [time, setTime] = useState('')
