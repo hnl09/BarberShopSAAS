@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useAppointmentsContext } from '../hooks/useAppointmentsContext';
 
 const AppointmentCard = ({ appointment }) => {

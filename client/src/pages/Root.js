@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Root.css'
 import AppointmentCard from '../components/AppointmentCard';
 import { useAppointmentsContext } from '../hooks/useAppointmentsContext';
+import AppointmentsForm from '../components/AppointmentsForm';
 
 const Root = () => {
   const { state, dispatch } = useAppointmentsContext()
@@ -76,6 +77,7 @@ const Root = () => {
         <div className="pagination">
         {renderPageNumbers()}
       </div>}
+      <AppointmentsForm />
     </div>
   );
 };
