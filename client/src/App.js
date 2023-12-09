@@ -2,7 +2,7 @@ import './App.css';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { useAuthContext } from './hooks/useAuthContext';
 import Navbar from './components/Navbar';
-import Root from './pages/Root'
+import Home from './pages/Home'
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 
@@ -15,7 +15,7 @@ const { user } = useAuthContext()
         <Navbar />
           <div className='pages'>
             <Routes>
-              <Route path='/' element={user ? <Root /> : <Navigate to="/login" />} />
+              <Route path='/' element={user ? <Home /> : <Navigate to="/login" />} />
               <Route path='/login' element={!user ? <Login /> : <Navigate to='/'/>} />
               <Route path='/signup' element={!user ? <Signup /> : <Navigate to='/' />}/>
             </Routes>

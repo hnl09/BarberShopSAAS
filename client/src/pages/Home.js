@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './Root.css'
+import './Home.css'
 import AppointmentCard from '../components/AppointmentCard';
 import { useAppointmentsContext } from '../hooks/useAppointmentsContext';
 import AppointmentsForm from '../components/AppointmentsForm';
