@@ -66,8 +66,8 @@ const Root = () => {
   };
 
   return (
-    <div className="root-container">
-      <h1>Agendamentos</h1>
+    <div className="home-container">
+    <div className='appointments'>
       {loading && <div>Carregando...</div>}
       {!loading && appointment === null && <div>Nenhum agendamento encontrado.</div>}
       {visibleAppointments.map((appointment, index) => (
@@ -76,7 +76,8 @@ const Root = () => {
       {appointments.length > 6 && 
         <div className="pagination">
         {renderPageNumbers()}
-      </div>}
+        </div>}
+      </div>
       <AppointmentsForm />
     </div>
   );

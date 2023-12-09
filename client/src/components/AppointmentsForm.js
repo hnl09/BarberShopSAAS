@@ -41,7 +41,7 @@ const AppointmentsForm = () => {
     }
 
     return (
-    <div>
+    <div className="workout-form">
         <form className="create" onSubmit={handleSubmit}>
             <h3>Adicione um novo agendamento</h3>
             <label>Email do Cliente:</label>
