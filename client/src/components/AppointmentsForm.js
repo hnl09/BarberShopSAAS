@@ -49,25 +49,25 @@ const AppointmentsForm = () => {
     <div className="workout-form">
         <form className="create" onSubmit={handleSubmit}>
             <h3>Adicione um novo agendamento</h3>
-            <label>Email do Cliente:</label>
+            <label>Email do Cliente:<span>*</span></label>
                 <input 
                 type='text' 
                 onChange={(e) => setCustomerEmail(e.target.value)}
                 value={customerEmail}
                 />
-            <label>Data:</label>
+            <label>Data:<span>*</span></label>
                 <input 
                 type='date'
                 onChange={(e) => setDate(e.target.value)}
                 value={date}
                 />
-            <label>Hora:</label>
+            <label>Hora:<span>*</span></label>
                 <input 
                 type='time'
                 onChange={(e) => setTime(e.target.value)}
                 value={time}
                 />
-            <label>Tipo de Serviço:</label>
+            <label>Tipo de Serviço:<span>*</span></label>
                 <input 
                 type='text' 
                 onChange={(e) => setServiceType(e.target.value)}
@@ -78,7 +78,7 @@ const AppointmentsForm = () => {
                 onChange={(e) => setServiceDetails(e.target.value)}
                 value={serviceDetails}
                 />
-            <label>Preço:</label>
+            <label>Preço:<span>*</span></label>
                 <input 
                 type='text' 
                 onChange={(e) => setPrice(e.target.value)}
