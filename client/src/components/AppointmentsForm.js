@@ -40,10 +40,8 @@ const AppointmentsForm = () => {
             setNotes('')
             console.log('Agendamento feito', json)
             dispatch({type: "CREATE_APPOINTMENT", payload: json})
-            console.log(state)
         }
     }
-    console.log(state)
 
     return (
     <div className="workout-form">
