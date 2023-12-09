@@ -65,7 +65,8 @@ export const createAppointment = async (req: Request<createAppointmentRequest>, 
                 { customer: customer._id },
                 { barberShop: barberShop._id }
             ]
-        }).sort({ time: 1 }); // Sort appointments by time in ascending order
+        })
+        .sort({ time: 1 }); // Sort appointments by time in ascending order
 
         const newAppointmentTime = convertTimeToMinutes(time);
 
@@ -91,6 +92,8 @@ export const createAppointment = async (req: Request<createAppointmentRequest>, 
         });
 
         await newAppointment.save();
+        await newAppointment.populate('customer')
+        await newAppointment.populate('barberShop')
 
         res.status(201).json(newAppointment);
     } catch (error) {

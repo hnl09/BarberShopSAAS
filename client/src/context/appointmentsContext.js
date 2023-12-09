@@ -8,6 +8,12 @@ export const appointmentsReducer = (state, action) => {
             return {
                 appointment: action.payload
             }
+        case 'CREATE_APPOINTMENT':
+            return {
+                appointment: {
+                    appointments: [action.payload, ...state.appointment.appointments]
+                }
+            }
         case 'DELETE_APPOINTMENT':
             return {
                 appointment: {

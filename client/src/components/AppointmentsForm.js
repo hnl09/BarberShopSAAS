@@ -1,6 +1,8 @@
 import { useState } from "react"
+import { useAppointmentsContext } from "../hooks/useAppointmentsContext"
 
 const AppointmentsForm = () => {
+    const { dispatch, state } = useAppointmentsContext()
     const [customerEmail, setCustomerEmail] = useState('')
     const [date, setDate] = useState('')
     const [time, setTime] = useState('')
@@ -24,7 +26,7 @@ const AppointmentsForm = () => {
             }
         })
 
-        const json = await response.json
+        const json = await response.json()
 
         if (!response.ok) {
             setError(json.error)
@@ -37,8 +39,11 @@ const AppointmentsForm = () => {
             setPrice('')
             setNotes('')
             console.log('Agendamento feito', json)
+            dispatch({type: "CREATE_APPOINTMENT", payload: json})
+            console.log(state)
         }
     }
+    console.log(state)
 
     return (
     <div className="workout-form">
@@ -84,7 +89,7 @@ const AppointmentsForm = () => {
                 onChange={(e) => setNotes(e.target.value)}
                 value={notes}
                 />
-            <button type="submit">Criar Agendamento</button>
+            <button type="submit">Agendar</button>
             {error && <div className="Error">{error}</div>}
         </form>
     </div>
